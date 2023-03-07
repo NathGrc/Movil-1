@@ -38,9 +38,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun LemonApp(modifier: Modifier = Modifier){
     var num by remember { mutableStateOf(1) }
+    var cont by remember {mutableStateOf(0)}
+    var rand = (2..4).random()
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.background
@@ -92,7 +95,15 @@ fun LemonApp(modifier: Modifier = Modifier){
                             .border(
                                 BorderStroke(2.dp, Color(105, 205, 216)), shape = RoundedCornerShape(4.dp)
                             )
-                            .clickable { num = 3 }
+                            .clickable {
+                                if (cont == rand) {
+                                    num = 3
+                                    cont = 0
+                                    rand = (2..4).random()
+                                } else {
+                                    cont++
+                                }
+                            }
                     )
                 }
             }
